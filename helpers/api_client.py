@@ -43,8 +43,6 @@ class ApiClient:
         return requests.get(f"{self.base_url}/orders", params=params)
 
     def get_order_by_track(self, track):
-        params = {}
-        if track is not None:
-            params["t"] = track
+        params = {"t": track}
         return requests.get(f"{self.base_url}/orders/track", params=params)
 
