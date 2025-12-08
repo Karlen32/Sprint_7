@@ -9,9 +9,11 @@ class TestOrdersFilters:
 
     def test_get_orders_by_courier_with_station_filter(self, api, courier, order):
 
+        stations = '["1","2"]'
+
         response = api.get_orders_filtered(
             courier_id=courier["id"],
-            nearest_station=["1","2"]
+            nearest_station=stations
         )
 
         assert response.status_code == 200

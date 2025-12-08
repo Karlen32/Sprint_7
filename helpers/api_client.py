@@ -33,23 +33,12 @@ class ApiClient:
 
 
     def get_orders_filtered(self, courier_id=None, nearest_station=None, limit=None, page=None):
-        params = {}
-
-        if courier_id is not None:
-            params["courierId"] = courier_id
-
-        if nearest_station is not None:
-            # если список → сериализуем в JSON строку
-            if isinstance(nearest_station, list):
-                params["nearestStation"] = json.dumps(nearest_station)
-            else:
-                params["nearestStation"] = nearest_station
-
-        if limit is not None:
-            params["limit"] = limit
-
-        if page is not None:
-            params["page"] = page
+        params = {
+            "courierId": courier_id,
+            "nearestStation": nearest_station,
+            "limit": limit,
+            "page": page
+        }
 
         return requests.get(f"{self.base_url}/orders", params=params)
 
