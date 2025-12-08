@@ -6,18 +6,15 @@ fake = Faker()
 
 class TestCreateCourier:
 
-    def test_create_courier_success(self, api):
+    def test_create_courier_success(self, api, cleanup):
         payload = generate_courier_payload()
 
         response = api.create_courier(payload)
+        cleanup.append((payload["login"], payload["password"]))
+
         assert response.status_code == 201
         assert response.json().get("ok") is True
 
-        login_resp = api.login_courier(payload["login"], payload["password"])
-        assert login_resp.status_code == 200
-        assert "id" in login_resp.json()
-
-        api.delete_courier(login_resp.json()["id"])
 
     def test_cannot_create_two_identical_couriers(self, courier, api):
         duplicate_payload = {

@@ -33,15 +33,17 @@ def courier(api):
         pass
 
 
-@pytest.fixture
-def auto_cleanup(api):
+@pytest.fixture()
+def cleanup(api):
     created = []
+
     yield created
-    for courier_id in created:
-        try:
-            api.delete_courier(courier_id)
-        except:
-            pass
+
+    for login, password in created:
+        login_resp = api.login_courier(login, password)
+        courier_id = login_resp.json()["id"]
+
+        api.delete_courier(courier_id)
 
 
 @pytest.fixture
