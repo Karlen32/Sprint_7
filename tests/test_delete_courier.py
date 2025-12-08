@@ -19,5 +19,5 @@ class TestDeleteCourier:
         response = api.delete_courier(nonexistent_id)
 
         assert response.status_code == 404
-        assert response.json().get("message") == "Курьера с таким id нет"
+        assert response.json().get("message") == "Курьера с таким id нет."
 

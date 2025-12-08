@@ -29,7 +29,7 @@ class TestCreateCourier:
         response = api.create_courier(duplicate_payload)
 
         assert response.status_code == 409
-        assert response.json().get("message") == "Этот логин уже используется"
+        assert response.json().get("message") == "Этот логин уже используется. Попробуйте другой."
 
     def test_create_courier_without_login_fails(self, api):
         payload = generate_courier_payload()
