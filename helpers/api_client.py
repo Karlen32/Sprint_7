@@ -12,13 +12,12 @@ class ApiClient:
         return requests.post(f"{self.base_url}/courier", json=payload)
 
     def login_courier(self, login, password):
-        payload = {}
-        if login is not None:
-            payload["login"] = login
-        if password is not None:
-            payload["password"] = password
-
+        payload = {
+            "login": login,
+            "password": password
+        }
         return requests.post(f"{self.base_url}/courier/login", json=payload)
+
 
     def delete_courier(self, courier_id):
         return requests.delete(f"{self.base_url}/courier/{courier_id}")
