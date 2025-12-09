@@ -1,13 +1,14 @@
 from faker import Faker
-
+import uuid
 fake = Faker()
 
 
 def generate_courier_payload():
+    uniq = uuid.uuid4().hex[:6]
     return {
-        "login": fake.user_name(),
-        "password": fake.password(),
-        "firstName": fake.first_name()
+        "login": f"user_{uniq}",
+        "password": "password123",
+        "firstName": "Test"
     }
 
 

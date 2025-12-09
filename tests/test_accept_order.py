@@ -1,4 +1,3 @@
-import time
 from helpers.generator import generate_order_payload
 
 
@@ -12,7 +11,6 @@ class TestAcceptOrderAPI:
 
     def test_accept_order_success(self, courier, api):
         track = self.create_order_track(api)
-        time.sleep(1)
 
         response = api.accept_order(track, courier["id"])
 
@@ -47,13 +45,8 @@ class TestAcceptOrderAPI:
         assert response.status_code == 404
         assert response.json().get("message") == "Заказа с таким id не существует"
 
-    def test_accept_order_already_in_work(self, courier, api):
-        track = self.create_order_track(api)
-        time.sleep(1)
-        first = api.accept_order(track, courier["id"])
-        assert first.status_code == 200
+    def test_accept_order_already_in_work(self, api, courier, order_in_work):
+        response = api.accept_order(order_in_work, courier["id"])
 
-        second = api.accept_order(track, courier["id"])
-
-        assert second.status_code == 409
-        assert second.json().get("message") == "Этот заказ уже в работе"
+        assert response.status_code == 409
+        assert response.json().get("message") == "Этот заказ уже в работе"

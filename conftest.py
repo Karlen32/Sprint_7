@@ -55,3 +55,9 @@ def order(api):
 
     return resp.json()["track"]
 
+@pytest.fixture
+def order_in_work(api, courier, order):
+    resp = api.accept_order(order, courier["id"])
+    assert resp.status_code == 200, "Не удалось взять заказ в работу"
+    return order
+
