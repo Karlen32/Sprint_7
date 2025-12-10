@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.log
+
+# Virtual env
+venv/
+env/
+.venv/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Bytecode
+*.pyc
+
+# pytest cache
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Allure
+# target обычно не коммитится!
+target/
+allure-report/
+
+# Reports - CI / local artifacts
+report/
+logs/
+output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
